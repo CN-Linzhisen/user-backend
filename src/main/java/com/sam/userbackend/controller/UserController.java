@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.sam.userbackend.constant.UserConstant.ADMIN_ROLE;
-import static com.sam.userbackend.constant.UserConstant.USER_LOGIN_STATUS;
+import static com.sam.userbackend.constant.UserConstant.USER_LOGIN_STATE;
 
 @RestController
 @RequestMapping("/user")
@@ -66,6 +66,17 @@ public class UserController {
     }
 
     /**
+     * 获取当前登录用户
+     * @param request
+     * @return 用户脱敏后信息
+     */
+    @GetMapping("get/login")
+    public User getLoginUser(HttpServletRequest request) {
+        User loginUser = userService.getLoginUser(request);
+        return userService.getSafetyUser(loginUser);
+    }
+
+    /**
      * 查询用户
      * @param username 用户名
      * @param request Http请求
@@ -107,7 +118,7 @@ public class UserController {
      * @return 用户是否为管理员
      */
     private boolean isAdmin(HttpServletRequest request) {
-        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATUS);
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
         User user = (User) userObj;
         return user != null && user.getUserRole() == ADMIN_ROLE;
     }

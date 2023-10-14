@@ -19,7 +19,7 @@ class UserMapperTest {
         User user = new User();
         user.setUsername("Lin");
         user.setUserAccount("200303");
-        user.setAvatarUrl("https://image-1309124269.cos.ap-nanjing.myqcloud.com/linbi/a90da89b-4e7a-4fc6-924b-0f5f41491f5c.jpg");
+        user.setuserAvatar("https://image-1309124269.cos.ap-nanjing.myqcloud.com/linbi/a90da89b-4e7a-4fc6-924b-0f5f41491f5c.jpg");
         user.setGender(0);
         user.setUserPassword("123456");
         user.setPhone("123456");

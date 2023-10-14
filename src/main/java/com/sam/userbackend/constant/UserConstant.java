@@ -6,7 +6,7 @@ public interface UserConstant {
     /**
      * 登录态的键
      */
-    String USER_LOGIN_STATUS = "userLoginState";
+    String USER_LOGIN_STATE = "userLoginState";
 
     /**
      * 用户权限

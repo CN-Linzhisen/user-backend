@@ -13,7 +13,7 @@ import org.springframework.util.DigestUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import static com.sam.userbackend.constant.UserConstant.USER_LOGIN_STATUS;
+import static com.sam.userbackend.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
 * @author 森哥
@@ -108,17 +108,42 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 用户脱敏
         User safetyUser = getSafetyUser(user);
         // 设置登录态
-        request.setAttribute(USER_LOGIN_STATUS,safetyUser);
+        request.getSession().setAttribute(USER_LOGIN_STATE,safetyUser);
         return safetyUser;
+    }
+
+    /**
+     * 获取当前登录用户
+     * @param request
+     * @return 用户信息
+     */
+    @Override
+    public User getLoginUser(HttpServletRequest request) {
+        // 先判断是否已登录
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null || currentUser.getId() == null) {
+            return null;
+        }
+        // 从数据库查询（追求性能的话可以注释，直接走缓存）
+        long userId = currentUser.getId();
+        currentUser = this.getById(userId);
+        if (currentUser == null) {
+            return null;
+        }
+        return currentUser;
     }
 
     @Override
     public User getSafetyUser(User originUser) {
+        if (originUser == null) {
+            return null;
+        }
         User safetyUser = new User();
         safetyUser.setId(originUser.getId());
-        safetyUser.setUsername(originUser.getUsername());
+        safetyUser.setUserName(originUser.getUserName());
         safetyUser.setUserAccount(originUser.getUserAccount());
-        safetyUser.setAvatarUrl(originUser.getAvatarUrl());
+        safetyUser.setUserAvatar(originUser.getUserAvatar());
         safetyUser.setGender(originUser.getGender());
         safetyUser.setPhone(originUser.getPhone());
         safetyUser.setEmail(originUser.getEmail());

@@ -1,8 +1,7 @@
 package com.sam.userbackend.service;
 
-import com.sam.userbackend.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sun.deploy.net.HttpRequest;
+import com.sam.userbackend.model.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,6 +31,13 @@ public interface UserService extends IService<User> {
      */
     User userLogin(String userAccount, String userPassword, HttpServletRequest request);
 
+    /**
+     * 获取当前登录用户
+     * @param request
+     * @return
+     */
+
+    User getLoginUser(HttpServletRequest request);
     /**
      * 用户脱敏
      * @param originUser
