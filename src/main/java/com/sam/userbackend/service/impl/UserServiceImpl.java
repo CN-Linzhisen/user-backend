@@ -2,9 +2,11 @@ package com.sam.userbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sam.userbackend.common.ErrorCode;
+import com.sam.userbackend.exception.BusinessException;
+import com.sam.userbackend.mapper.UserMapper;
 import com.sam.userbackend.model.domain.User;
 import com.sam.userbackend.service.UserService;
-import com.sam.userbackend.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -131,7 +133,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (currentUser == null) {
             return null;
         }
-        return currentUser;
+        // 返回脱敏后信息
+        User safetyUser = getSafetyUser(currentUser);
+        return safetyUser;
+    }
+
+    @Override
+    public int userLogout(HttpServletRequest request) {
+        if (request == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        request.removeAttribute(USER_LOGIN_STATE);
+        return 1;
     }
 
     @Override
