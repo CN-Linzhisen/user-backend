@@ -1,6 +1,7 @@
 package com.sam.userbackend.model.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ public class User implements Serializable {
     /**
      * id
      */
+    // 处理前端Long精度丢失，传json时转为字符串
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 

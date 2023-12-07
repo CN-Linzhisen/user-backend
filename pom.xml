@@ -66,13 +66,28 @@
 			<artifactId>mybatis-plus-core</artifactId>
 			<version>3.5.3.1</version>
 		</dependency>
+		<!-- https://hutool.cn/docs/index.html#/-->
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.8.8</version>
+		</dependency>
+		<!-- COS 存储 -->
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>cos-sts_api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<!-- https://cloud.tencent.com/document/product/436/10199-->
+		<!-- https://cloud.tencent.com/document/product/436/10199-->
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>cos_api</artifactId>
+			<version>5.6.89</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
