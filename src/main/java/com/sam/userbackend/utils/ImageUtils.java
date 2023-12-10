@@ -14,13 +14,13 @@ import java.util.UUID;
 @Component
 public class ImageUtils {
 
-    private String secretId = "AKIDCGHmCTiomXrAKcgU9fxzztnibYPhrpZK";
+    private String secretId = "";
 
-    private String secretKey = "lbLyZDh3DFA3kOwNel4INH3b1KYkrrkW";
+    private String secretKey = "";
 
-    private String region = "ap-nanjing";
+    private String region = "";
 
-    private String bucketName = "image-1309124269";
+    private String bucketName = "";
 
     private COSClient cosClient;
 
